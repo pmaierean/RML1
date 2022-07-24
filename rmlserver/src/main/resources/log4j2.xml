@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="info">
+    <Properties>
+        <Property name="basePath">/opt/local/logger/rmlcad</Property>
+    </Properties>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} %t (%C:%L) - %msg%n"/>
+        </Console>
+        <RollingFile name="fileLogger" fileName="${basePath}/app-info.log"
+                     filePattern="${basePath}/app-info-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} %t (%C:%L) - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.maiereni.cad" level="debug"/>
+        <Logger name="org.springframework.security" level="debug"/>
+        <Logger name="org.springframework.web" level="error"/>
+        <Root level="error" additivity="false">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="fileLogger"/>
+        </Root>
+    </Loggers>
+</Configuration>

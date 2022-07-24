@@ -1,0 +1,22 @@
+info:
+  app:
+    name: RML-1 web server
+    description: An application to interface MDX-15
+    version: 1.0.0
+
+spring:
+  application:
+    name: ${info.app.name}
+  mvc:
+    servlet:
+      path: "/"
+  profiles:
+    active: ${env}
+  web:
+    resources:
+      chain:
+        enabled: true
+server:
+  tomcat:
+    docDir: ${env.TEMP}\temp\tomcat\app
+    basedir: ${env.TEMP}\temp\tomcat\base
